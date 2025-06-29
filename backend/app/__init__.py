@@ -11,13 +11,11 @@ def create_app():
     # CORS setup for both local and deployed frontend
     CORS(app, resources={
         r"/api/*": {
-            "origins": [
-                "http://localhost:3000",  # for local testing
-                "https://food-for-all-bharat-hackathon.vercel.app"  # for Vercel
-            ]
+            "origins": ["http://localhost:3000", "https://food-for-all-bharat-hackathon.vercel.app"],
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
         }
     }, supports_credentials=True)
-
     # DB Config
     app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config.SQLALCHEMY_TRACK_MODIFICATIONS

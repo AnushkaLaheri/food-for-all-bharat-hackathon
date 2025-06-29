@@ -69,4 +69,44 @@ def login():
         }), 200
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
-    
+
+@auth_bp.route('/profile/<int:user_id>', methods=['GET'])
+def get_profile(user_id):
+    user = User.query.filter_by(user_id=user_id).first()
+    if user:
+        return jsonify({
+            "status": "success",
+            "data": {
+                "user_id": user.user_id,
+                "full_name": user.full_name,
+                "email": user.email,
+                "phone_number": user.phone_number,
+                "address": user.address,
+                "role": user.role,
+                "profile_picture": user.profile_picture
+            }
+        })
+    return jsonify({"status": "error", "message": "User not found"}), 404
+
+
+# Update profile
+@auth_bp.route('/auth/update-profile', methods=['PUT'])
+def update_profile():
+    data = request.json
+    user_id = data.get('user_id')
+
+    if not user_id:
+        return jsonify({"status": "error", "message": "User ID missing"}), 400
+
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"status": "error", "message": "User not found"}), 404
+
+    user.full_name = data.get("name", user.full_name)
+    user.email = data.get("email", user.email)
+    user.phone_number = data.get("phone", user.phone_number)
+    user.address = data.get("address", user.address)
+
+    db.session.commit()
+
+    return jsonify({"status": "success", "message": "Profile updated successfully"})

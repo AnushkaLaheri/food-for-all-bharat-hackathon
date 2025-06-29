@@ -8,8 +8,9 @@ MYSQL_PORT = os.environ.get("MYSQL_PORT", "3306")
 MYSQL_DB = os.environ.get("MYSQL_DB", "railway")
 
 SQLALCHEMY_DATABASE_URI = (
-    f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
+    "mysql+pymysql://root:MpwBJARwgaKHKIJRuicYYBiEMewfMMDr@crossover.proxy.rlwy.net:10016/railway"
 )
+
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 SECRET_KEY = os.environ.get(
