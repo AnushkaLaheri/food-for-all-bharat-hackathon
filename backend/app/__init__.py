@@ -7,7 +7,8 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
+    CORS(app, origins=["https://food-for-all-bharat-hackathon.vercel.app"], supports_credentials=True)
+
 
     # ✅ Use SQLALCHEMY config for PyMySQL
     app.config['SQLALCHEMY_DATABASE_URI'] = config.SQLALCHEMY_DATABASE_URI

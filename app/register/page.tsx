@@ -60,6 +60,7 @@ export default function Register() {
     toast({
       title: "Registration Successful!",
       description: response.message || "Your account has been created successfully!",
+      variant: "default",
       duration: 5000,
     });
 
@@ -70,7 +71,9 @@ export default function Register() {
   } catch (error) {
     toast({
       title: "Registration Error",
-      description: getErrorMessage(error),
+      description: getErrorMessage(error)
+        ? "This email is already registered. Try logging in or use another email."
+        : "An error occurred during registration. Please try again.",
       variant: "destructive",
     });
   } finally {

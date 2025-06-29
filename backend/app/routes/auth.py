@@ -30,7 +30,7 @@ def register():
 
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
-        return jsonify({'message': 'User already exists'}), 409
+        return jsonify({'message': 'Email already exists'}), 409
 
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
@@ -69,3 +69,4 @@ def login():
         }), 200
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
+    
