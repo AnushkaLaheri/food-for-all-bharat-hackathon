@@ -1,5 +1,7 @@
-from app import create_app
 import os
+from app import create_app
+from flask import Flask
+from flask_cors import CORS  # ✅ THIS IS MISSING
 
 app = create_app()
 
